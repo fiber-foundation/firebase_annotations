@@ -104,55 +104,6 @@ class GeoField {
   const GeoField();
 }
 
-/// {@template geo_hash_field_annotation}
-/// Annotation applied to the field that stores the **geohash** of a location.
-///
-/// This annotation designates the string field containing the precomputed
-/// geohash used for Firestore range queries.
-///
-/// The code generator relies on this annotation to:
-/// - Identify the field to use in `.orderBy()`, `.startAt()`, `.endAt()`
-/// - Perform prefix matching to fetch all documents within a radius
-///
-/// ### Usage
-/// ```dart
-/// @GeoHashField()
-/// final String geohash;
-/// ```
-///
-/// The geohash value must be generated before writing the document to Firestore.
-/// {@endtemplate}
-class GeoHashField {
-  const GeoHashField();
-}
-
-/// {@template geo_location_field_annotation}
-/// Annotation applied to the field representing the actual **geographic point**.
-///
-/// This field must contain the latitude/longitude values used to compute:
-/// - distances from the search center
-/// - sorting by nearest location
-/// - strict radius filtering
-///
-/// The code generator uses this annotation to allow automatic inference of
-/// the function `geopointFrom`, removing the need for the developer to specify:
-///
-/// ```dart
-/// geopointFrom: (model) => model.location
-/// ```
-///
-/// ### Usage
-/// ```dart
-/// @GeoLocationField()
-/// final Location coordinates;
-/// ```
-///
-/// The annotated field must contain a type that exposes `lat` and `lng`.
-/// {@endtemplate}
-class GeoLocationField {
-  const GeoLocationField();
-}
-
 /// {@template from_map_annotation}
 /// Annotation helper used to configure how a field is handled
 /// during `fromMap` code generation.
