@@ -86,49 +86,12 @@ class Field {
   /// {@endtemplate}
   final bool toMap;
 
-  /// {@template field_annotation.is_geo_spatial}
-  /// Indicates whether this field represents a **geospatial value**.
-  ///
-  /// When `true`, the code generator applies the following rules:
-  ///
-  /// - The field is expected to be an **object containing two doubles**:
-  ///   `lat` and `lng`.
-  /// - If the field does not match this expected shape (missing keys or
-  ///   incorrect types), it will be **skipped automatically** during
-  ///   generation to avoid producing invalid geospatial logic.
-  /// - A geospatial-enabled field allows the system to generate helper
-  ///   functions or mapping code used for performing **geo-queries**
-  ///   (e.g. distance filtering, bounding-box search, radius queries).
-  ///
-  /// This flag is intended for models that participate in geospatial
-  /// indexing or search.
-  /// {@endtemplate}
-  final bool isGeoSpatial;
-
-  /// {@template field_annotation.is_filter_element}
-  /// Marks this field as a **filterable element**.
-  ///
-  /// When `true`, the code generator:
-  ///
-  /// - Adds the field to a dedicated list of queryable/filterable fields.
-  /// - Allows search or query builders to reference this field when constructing
-  ///   filtering expressions (e.g. `where("status")`, `where("age")`, etc.).
-  /// - Ensures the field is registered properly so that generated query
-  ///   interfaces can expose type-safe filtering helpers.
-  ///
-  /// This flag is used for models where certain fields participate in
-  /// application-level search, filtering, or indexing logic.
-  /// {@endtemplate}
-  final bool isFilterElement;
-
   const Field({
     this.key,
     this.documentId = false,
     this.fromMap = const FromMap(fromMap: true),
     this.copyWith = true,
     this.toMap = true,
-    this.isGeoSpatial = false,
-    this.isFilterElement = false,
   });
 }
 

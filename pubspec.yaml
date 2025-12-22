@@ -1,6 +1,6 @@
 name: fiber_firebase_annotations
 description: "This package provides lightweight Firebase-related annotations designed for code generation. It defines clean, structured metadata for models, collections, and storage paths, enabling generators to produce strongly typed Firebase integrations with minimal boilerplate."
-version: 1.0.4
+version: 1.0.5
 
 environment:
   sdk: ^3.9.2
