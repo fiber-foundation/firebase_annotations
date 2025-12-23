@@ -18,7 +18,7 @@
 // THIS SCRIPT AND ITS CODE ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. IN NO EVENT SHALL
-// FIBER BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+// Fiber BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
 // EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO LOSS OF USE,
 // DATA, PROFITS, OR BUSINESS INTERRUPTION) ARISING OUT OF OR RELATED TO THE USE
 // OR INABILITY TO USE THIS SCRIPT, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -27,7 +27,16 @@
 // is a violation of applicable intellectual property laws and will result
 // in legal action.
 
-export './src/database.dart';
-export './src/field.dart';
-export './src/firestore.dart';
-export './src/storage.dart';
+import 'package:fiber_firebase_annotations/fiber_firebase_annotations.dart';
+
+@StorageGen(
+  root: [
+    StorageNode(name: 'issues'),
+    StorageNode(
+      name: 'users',
+      nodeId: "userId",
+      children: [StorageNode(name: "avatar")],
+    ),
+  ],
+)
+class Storage {}

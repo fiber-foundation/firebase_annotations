@@ -5,7 +5,7 @@
 # fiber_firebase_annotation
 
 `fiber_firebase_annotation` is a Dart annotation package designed to power a Firebase-oriented code generation system.
-It allows you to define typed, declarative, and consistent data models for Firestore, Database, Storage, and domain models, without embedding any Firebase-specific logic into application code.
+It allows you to define typed, declarative, and consistent data models for Firestore, Database, Storage, without embedding any Firebase-specific logic into application code.
 This package does not generate any code by itself.
 It only provides the annotations consumed by Fiber code generators.
 
@@ -37,7 +37,6 @@ Domain | Primary Annotation |
 Firestore | @FirestoreCollectionGen(...), @FirestoreSubCollectionGen(...) |
 Database | @DatabaseGen(...) |
 Storage | @StorageNode(...) |
-Model | @ModelGen(...) |
 
 ## Firebase Firestore
 
@@ -126,18 +125,3 @@ class Storage {}
 ```
 
 This annotation describes the entire storage tree, including nested folders and dynamic segments.
-
-## Model
-
-The @ModelGen(...) annotation is used to mark a Dart class as a data model eligible for automatic code generation.
-
-It acts as a generic entry point for model-related generators, allowing common boilerplate to be produced while keeping models clean, immutable, and backend-agnostic.
-
-```dart
-@ModelGen()
-class User {
-  // fields...
-}
-```
-
-The annotated class should describe data only, without any infrastructure or persistence logic.

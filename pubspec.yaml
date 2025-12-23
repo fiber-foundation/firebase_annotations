@@ -1,6 +1,7 @@
 name: fiber_firebase_annotations
-description: "This package provides lightweight Firebase-related annotations designed for code generation. It defines clean, structured metadata for models, collections, and storage paths, enabling generators to produce strongly typed Firebase integrations with minimal boilerplate."
-version: 1.0.6
+description: >
+  A Dart annotation package providing lightweight metadata for Firebase-oriented code generation. It defines structured annotations for Firestore, Realtime Database, Storage, and domain models, enabling Fiber generators to create strongly typed, Firebase-agnostic integrations with minimal boilerplate and clear separation of concerns.
+version: 1.0.7
 
 environment:
   sdk: ^3.9.2

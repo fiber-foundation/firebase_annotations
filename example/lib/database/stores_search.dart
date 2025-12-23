@@ -27,48 +27,29 @@
 // is a violation of applicable intellectual property laws and will result
 // in legal action.
 
-/// {@template model_gen}
-/// Annotation used to mark a Dart class as a **data model**
-/// eligible for automatic code generation.
-///
-/// The `@ModelGen()` annotation indicates to the build system
-/// that the annotated class should have additional boilerplate generated,
-/// such as:
-/// - Serialization methods (`toMap`, `fromMap`)
-/// - Copying and mutation helpers (`copyWith`)
-/// - Equality and hashCode overrides (if not already handled by [Equatable])
-///
-/// ### Example
-/// ```dart
-/// @ModelGen()
-/// class User {
-///   final String id;
-///   final String name;
-///   final int age;
-///
-///   const User({
-///     required this.id,
-///     required this.name,
-///     required this.age,
-///   });
-/// }
-/// ```
-///
-/// The generator might then produce:
-/// ```dart
-/// extension UserGenerated on User {
-///   Map<String, dynamic> toMap() => {...};
-///   static User fromMap(Map<String, dynamic> map) => ...;
-///   User copyWith({String? name, int? age}) => ...;
-/// }
-/// ```
-///
-/// ### Notes
-/// - This annotation serves as a **generic entry point** for model code generation.
-/// - It can be combined with other annotations like `@FirestoreGen` or `@DatabaseGen`
-///   to extend generated functionality for specific backends.
-/// - The generator should detect all annotated classes automatically during build.
-/// {@endtemplate}
-class ModelGen {
-  const ModelGen();
+import 'package:equatable/equatable.dart';
+import 'package:fiber_firebase_annotations/fiber_firebase_annotations.dart';
+
+@DatabaseGen(
+  databaseURL: "https://e72c8f8cd0b4f-0ee7-4181-bae4-7e3126a7ebc5.europe-west1.firebasedatabase.app",
+  name: "stores_search",
+)
+class FirebaseStoresSearch extends Equatable {
+  @Field(documentId: true, toMap: false, copyWith: false)
+  final String storeId;
+  final double lat;
+  final double lng;
+  final String updatedAt;
+  final String geohash;
+
+  const FirebaseStoresSearch({
+    required this.storeId,
+    required this.lat,
+    required this.lng,
+    required this.updatedAt,
+    required this.geohash,
+  });
+
+  @override
+  List<Object?> get props => [storeId, lat, lng, updatedAt, geohash];
 }
