@@ -27,6 +27,7 @@
 // is a violation of applicable intellectual property laws and will result
 // in legal action.
 
+export './src/auth.dart';
 export './src/database.dart';
 export './src/field.dart';
 export './src/firestore.dart';
