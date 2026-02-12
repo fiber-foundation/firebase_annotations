@@ -1,3 +1,11 @@
+# 1.0.9
+
+- Added `AuthGen` annotation for authentication code generation.
+- Introduced `AuthKind` enum to define authentication scope (user, administrator).
+- Introduced `AuthFlow` enum to configure supported flows (signIn, signUp, forgotPassword).
+- Added support for multiple authentication flows via `List<AuthFlow>`.
+- Added detailed documentation for authentication configuration.
+
 # 1.0.8
 
 - Added a README file to the `example/` directory to document and link available examples.
