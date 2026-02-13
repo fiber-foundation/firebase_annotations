@@ -97,6 +97,9 @@ enum AuthKind {
 
 /// Defines the available authentication flows.
 enum AuthFlow {
+  /// Authentication session state
+  session,
+
   /// User login flow.
   signIn,
 

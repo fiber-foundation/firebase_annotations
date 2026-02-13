@@ -1,3 +1,9 @@
+# 1.1.1
+
+- Renamed `AuthFlow.user` to `AuthFlow.session`.
+- Clarified semantic meaning of session-related authentication state (isConnected, userId, tokens, etc.).
+- Improved inline documentation for authentication flow definitions.
+
 # 1.1.0
 
 - Introduced `DefaultValueKind` enum to classify default value semantics (string, double, integer, boolean, nil, enumeration, object).
