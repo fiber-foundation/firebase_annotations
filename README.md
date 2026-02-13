@@ -24,7 +24,7 @@ It only provides the annotations consumed by Fiber code generators.
 
 ```yaml
 dependencies:
-  fiber_firebase_annotation: ^1.0.6
+  fiber_firebase_annotation: ^1.0.9
 ```
 
 To be used in conjunction with Fiber code generation packages (`fiber_*_gen`).
@@ -36,6 +36,7 @@ Domain | Primary Annotation |
 Firestore | @FirestoreCollectionGen(...), @FirestoreSubCollectionGen(...) |
 Database | @DatabaseGen(...) |
 Storage | @StorageNode(...) |
+Authentication | @AuthGen(...)
 
 ## Firebase Firestore
 

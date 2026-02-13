@@ -1,3 +1,11 @@
+# 1.1.0
+
+- Introduced `DefaultValueKind` enum to classify default value semantics (string, double, integer, boolean, nil, enumeration, object).
+- Refactored `DefaultValue` to include a `kind` property for stronger semantic typing.
+- Added `DefaultValue.raw(String value, DefaultValueKind kind)` factory for advanced and internal reconstruction use cases.
+- Improved documentation for `DefaultValue`, `DefaultValueKind`, and `Literalizable`.
+- Enhanced default value system to better support typed code generation scenarios.
+
 # 1.0.9
 
 - Added `AuthGen` annotation for authentication code generation.

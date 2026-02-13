@@ -299,6 +299,27 @@ class DefaultValue {
   /// ```
   /// {@endtemplate}
   static object_(Literalizable value) => DefaultValue._(value.toLiteral(), DefaultValueKind.object);
+
+  /// {@template default_value.raw}
+  /// Creates a [DefaultValue] from a raw Dart expression and its
+  /// associated [DefaultValueKind].
+  ///
+  /// This factory is intended for advanced or internal usage where a
+  /// default value must be reconstructed dynamically.
+  ///
+  /// The provided [value] must be a **valid Dart expression**, as it will be
+  /// injected verbatim into generated source code without modification.
+  ///
+  /// Example:
+  /// ```dart
+  /// DefaultValue.raw("MyEnum.defaultValue", DefaultValueKind.enumeration);
+  /// ```
+  ///
+  /// Unlike other factory helpers (`string_`, `int_`, etc.), this method
+  /// does not perform type validation and assumes the caller guarantees
+  /// semantic correctness.
+  /// {@endtemplate}
+  static raw_(String value, DefaultValueKind kind) => DefaultValue._(value, kind);
 }
 
 /// {@template literalizable}
