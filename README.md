@@ -4,27 +4,39 @@
 
 # fiber_firebase_annotation
 
-`fiber_firebase_annotation` is a Dart annotation package designed to power a Firebase-oriented code generation system.
-It allows you to define typed, declarative, and consistent data models for Firestore, Database, Storage, without embedding any Firebase-specific logic into application code.
-This package does not generate any code by itself.
-It only provides the annotations consumed by Fiber code generators.
+`fiber_firebase_annotation` is a Dart annotation package that provides the declarative foundation for the Fiber Firebase code generation ecosystem.
+
+It enables you to define strongly-typed, consistent, and infrastructure-aware configurations for:
+
+- Firestore collections and subcollections
+- Realtime Database schemas
+- Firebase Storage hierarchies
+- Authentication domains and flows
+
+All without embedding any Firebase-specific runtime logic into your application layer.
+
+This package does not generate code by itself.
+It only exposes annotations that are consumed by Fiber generator packages, ensuring a strict separation between infrastructure definitions and business logic.
 
 ## Goals
 
-- Define your data structure once
+- Define your Firebase infrastructure declaratively in one place
 - Automatically generate:
-  - Firestore / Database models
-  - Typed Storage access helpers
-  - Typed constants
-  - fromMap / toMap mappings
-- Decouple business logic from Firebase infrastructure
-- Enable future backend migration (Firebase → another backend)
+  - Authentication services (session and flows)
+  - Firestore collection and subcollection accessors
+  - Realtime Database bindings
+  - Strongly-typed Storage path helpers
+  - Typed constants and helpers
+  - `fromMap` / `toMap` mappings with typed default values
+- Enforce consistency across your data and authentication layers
+- Keep business logic fully decoupled from Firebase runtime APIs
+- Make backend evolution possible (Firebase → another backend) without rewriting your application layer
 
 ## Installation
 
 ```yaml
 dependencies:
-  fiber_firebase_annotation: ^1.0.9
+  fiber_firebase_annotation: ^1.1.2
 ```
 
 To be used in conjunction with Fiber code generation packages (`fiber_*_gen`).
@@ -33,10 +45,27 @@ To be used in conjunction with Fiber code generation packages (`fiber_*_gen`).
 
 Domain | Primary Annotation |
 --- | ---
+Authentication | @AuthGen(...)
 Firestore | @FirestoreCollectionGen(...), @FirestoreSubCollectionGen(...) |
 Database | @DatabaseGen(...) |
 Storage | @StorageNode(...) |
-Authentication | @AuthGen(...)
+
+## Authentication
+
+Use @AuthGen(...) to declaratively define an authentication domain and its enabled flows.
+
+```dart
+@AuthGen(
+  kind: AuthKind.user,
+  flows: [
+    AuthFlow.session,
+    AuthFlow.signIn,
+    AuthFlow.signUp,
+    AuthFlow.forgotPassword,
+  ],
+)
+class UserAuthConfig {}
+```
 
 ## Firebase Firestore
 

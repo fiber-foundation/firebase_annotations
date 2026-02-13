@@ -1,3 +1,11 @@
+# 1.1.2
+
+- Updated README to reflect authentication support and session-based flows.
+- Improved project description to cover Firestore, Database, Storage, and Authentication.
+- Clarified package goals and infrastructure scope.
+- Added dedicated Authentication section with usage examples.
+- Updated installation version reference.
+
 # 1.1.1
 
 - Renamed `AuthFlow.user` to `AuthFlow.session`.

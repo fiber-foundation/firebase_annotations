@@ -77,6 +77,7 @@ class AuthGen {
   /// (e.g. login + registration).
   ///
   /// Available options:
+  /// - [AuthFlow.session]
   /// - [AuthFlow.signIn]
   /// - [AuthFlow.signUp]
   /// - [AuthFlow.forgotPassword]
