@@ -28,23 +28,26 @@
 // in legal action.
 
 /// {@template auth_gen}
-/// Annotation used to declare an **authentication configuration**
-/// for automatic code generation.
+/// Annotation used to declare a fully-defined authentication configuration
+/// for automatic code generation within the Fiber ecosystem.
 ///
 /// When applied to a class, this annotation instructs the generator to:
-/// - Create role-specific authentication logic based on [AuthKind].
-/// - Generate only the selected authentication [AuthModule] entries.
-/// - Produce strongly-typed helpers for each enabled flow.
-/// - Scope authentication services to a defined domain.
+/// - Generate role-scoped authentication logic based on [AuthKind].
+/// - Bind authentication to a specific Firestore collection.
+/// - Configure the regional endpoint for Cloud Functions callables.
+/// - Generate only the selected authentication [AuthModule] capabilities.
+/// - Produce strongly-typed services, helpers, and guards.
 ///
-/// The annotated class acts purely as a declarative marker and
-/// typically contains no implementation details.
+/// The annotated class acts purely as a declarative configuration entry
+/// point and typically contains no implementation details.
 ///
 /// ### Example
 /// ```dart
 /// @AuthGen(
 ///   kind: AuthKind.user,
-///   flows: [
+///   firestoreCollection: "__fbs__users",
+///   callableRegion: "us-central1",
+///   modules: [
 ///     AuthModule.signIn,
 ///     AuthModule.signUp,
 ///   ],
@@ -54,13 +57,16 @@
 ///
 /// The generator may then produce:
 /// - Role-aware authentication services.
-/// - Flow-specific methods (e.g. `signIn()`, `signUp()`).
-/// - Typed session and guard helpers.
+/// - Firestore-bound user access helpers.
+/// - Region-configured callable integrations.
+/// - Module-specific methods (e.g. `signIn()`, `signUp()`).
+/// - Typed session state and guard utilities.
 ///
 /// ### Notes
 /// - [kind] defines the authentication domain.
-/// - [flows] lists all authentication flows that should be generated.
-/// - Providing multiple flows enables multi-capability generation.
+/// - [firestoreCollection] specifies the associated user collection.
+/// - [callableRegion] determines the Cloud Functions region.
+/// - [modules] lists all authentication capabilities to generate.
 /// - The annotated class serves only as a generation entry point.
 ///
 /// {@endtemplate}
@@ -118,6 +124,7 @@ class AuthGen {
   /// - Prevent cross-region invocation mismatches
   final String callableRegion;
 
+  /// {@macro auth_gen}
   const AuthGen({
     required this.kind,
     required this.modules,

@@ -1,3 +1,9 @@
+# 1.1.4
+
+- Updated and refined authentication documentation for `AuthGen`.
+- Clarified configuration parameters (`firestoreCollection`, `callableRegion`, `modules`).
+- Improved example usage and generation details for authentication setup.
+
 # 1.1.3
 
 - Renamed `AuthFlow` to `AuthModule` for clearer semantic meaning.
