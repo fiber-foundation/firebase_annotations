@@ -57,11 +57,13 @@ Use @AuthGen(...) to declaratively define an authentication domain and its enabl
 ```dart
 @AuthGen(
   kind: AuthKind.user,
-  flows: [
-    AuthFlow.session,
-    AuthFlow.signIn,
-    AuthFlow.signUp,
-    AuthFlow.forgotPassword,
+  firestoreCollection: "__fbs__users",
+  callableRegion: "us-central1",
+  modules: [
+    AuthModule.session,
+    AuthModule.signIn,
+    AuthModule.signUp,
+    AuthModule.forgotPassword,
   ],
 )
 class UserAuthConfig {}

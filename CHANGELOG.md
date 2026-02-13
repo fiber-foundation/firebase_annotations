@@ -1,3 +1,12 @@
+# 1.1.3
+
+- Renamed `AuthFlow` to `AuthModule` for clearer semantic meaning.
+- Improved authentication terminology to better reflect capability-based generation.
+- Added `firestoreCollection` parameter to `AuthGen` for Firestore binding.
+- Added `callableRegion` parameter to `AuthGen` for Cloud Functions region configuration.
+- Enhanced inline documentation for `AuthGen`, `AuthKind`, and `AuthModule`.
+- Improved overall authentication annotation clarity and generator alignment.
+
 # 1.1.2
 
 - Updated README to reflect authentication support and session-based flows.

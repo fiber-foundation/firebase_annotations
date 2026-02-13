@@ -33,7 +33,7 @@
 ///
 /// When applied to a class, this annotation instructs the generator to:
 /// - Create role-specific authentication logic based on [AuthKind].
-/// - Generate only the selected authentication [AuthFlow] entries.
+/// - Generate only the selected authentication [AuthModule] entries.
 /// - Produce strongly-typed helpers for each enabled flow.
 /// - Scope authentication services to a defined domain.
 ///
@@ -45,8 +45,8 @@
 /// @AuthGen(
 ///   kind: AuthKind.user,
 ///   flows: [
-///     AuthFlow.signIn,
-///     AuthFlow.signUp,
+///     AuthModule.signIn,
+///     AuthModule.signUp,
 ///   ],
 /// )
 /// class UserAuthConfig {}
@@ -77,36 +77,112 @@ class AuthGen {
   /// (e.g. login + registration).
   ///
   /// Available options:
-  /// - [AuthFlow.session]
-  /// - [AuthFlow.signIn]
-  /// - [AuthFlow.signUp]
-  /// - [AuthFlow.forgotPassword]
-  final List<AuthFlow> flows;
+  /// - [AuthModule.session]
+  /// - [AuthModule.signIn]
+  /// - [AuthModule.signUp]
+  /// - [AuthModule.forgotPassword]
+  final List<AuthModule> modules;
 
-  /// Creates a new authentication annotation for code generation.
-  const AuthGen({required this.kind, required this.flows});
+  /// Defines the Firestore collection associated with this
+  /// authentication domain.
+  ///
+  /// This collection typically represents the user store
+  /// where authentication-related data is persisted
+  /// (e.g. user profiles, roles, metadata, session flags).
+  ///
+  /// Example:
+  /// ```dart
+  /// firestoreCollection: "__fbs__users"
+  /// ```
+  ///
+  /// The generator may use this value to:
+  /// - Bind authentication logic to a specific Firestore collection
+  /// - Generate typed document references
+  /// - Produce role-aware data access helpers
+  final String firestoreCollection;
+
+  /// Defines the Firebase Cloud Functions region used for
+  /// authentication callables.
+  ///
+  /// This value determines which regional endpoint is targeted
+  /// when invoking authentication-related HTTPS callable functions.
+  ///
+  /// Example:
+  /// ```dart
+  /// callableRegion: "us-central1"
+  /// ```
+  ///
+  /// The generator may use this value to:
+  /// - Configure region-specific callable clients
+  /// - Ensure alignment with deployed backend functions
+  /// - Prevent cross-region invocation mismatches
+  final String callableRegion;
+
+  const AuthGen({
+    required this.kind,
+    required this.modules,
+    required this.firestoreCollection,
+    required this.callableRegion,
+  });
 }
 
+/// {@template auth_kind}
 /// Defines the supported authentication domains.
+///
+/// Each value represents a distinct authentication scope.
+/// The selected [AuthKind] determines how authentication logic,
+/// data bindings, and generated services are segmented.
+///
+/// This allows applications to isolate different authentication
+/// contexts (e.g. end-users vs administrators) while maintaining
+/// strongly-typed and role-aware infrastructure.
+/// {@endtemplate}
 enum AuthKind {
-  /// Standard application user authentication.
+  /// Standard end-user authentication domain.
+  ///
+  /// Intended for regular application users interacting
+  /// with the public-facing features of the system.
   user,
 
-  /// Privileged administrator authentication.
+  /// Privileged administrator authentication domain.
+  ///
+  /// Intended for back-office or elevated accounts with
+  /// higher access levels and restricted capabilities.
   administrator,
 }
 
-/// Defines the available authentication flows.
-enum AuthFlow {
-  /// Authentication session state
+/// {@template auth_module}
+/// Defines the available authentication modules that can be generated
+/// for a given authentication configuration.
+///
+/// Each value represents a distinct authentication capability.
+/// The selected modules determine which services, helpers, and
+/// infrastructure bindings will be produced by the code generator.
+///
+/// Modules can be combined to enable multi-capability authentication
+/// (e.g. session management + sign-in + password recovery).
+/// {@endtemplate}
+enum AuthModule {
+  /// Generates authentication session support.
+  ///
+  /// This typically includes:
+  /// - Session state helpers (e.g. `isConnected`)
+  /// - Access to the authenticated user identifier
+  /// - Token or metadata management utilities
   session,
 
-  /// User login flow.
+  /// Generates user sign-in logic.
+  ///
+  /// Includes login helpers and related authentication handling.
   signIn,
 
-  /// User registration flow.
+  /// Generates user registration logic.
+  ///
+  /// Includes account creation helpers and associated validation flows.
   signUp,
 
-  /// Password recovery flow.
+  /// Generates password recovery logic.
+  ///
+  /// Includes helpers for initiating and handling password reset flows.
   forgotPassword,
 }
