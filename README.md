@@ -56,17 +56,26 @@ Use @AuthGen(...) to declaratively define an authentication domain and its enabl
 
 ```dart
 @AuthGen(
-  kind: AuthKind.user,
   firestoreCollection: "__fbs__users",
-  callableRegion: "us-central1",
-  modules: [
-    AuthModule.session,
-    AuthModule.signIn,
-    AuthModule.signUp,
-    AuthModule.forgotPassword,
-  ],
+  region: FirebaseFunctionsRegion.us_central1,
+  passwordPolicy: PasswordPolicy(
+    min: 8,
+    requireUppercase: true,
+    requireDigits: true,
+  ),
+  signIn: SignInModule(
+    requireEmailVerification: true,
+  ),
+  signUp: SignUpModule(
+    requireEmailVerification: false,
+    autoSignInAfterSignUp: true,
+  ),
 )
-class UserAuthConfig {}
+class User {
+  final String firstname;
+  final String lastname;
+  ...
+}
 ```
 
 ## Firebase Firestore

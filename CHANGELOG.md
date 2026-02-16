@@ -1,3 +1,14 @@
+# 1.1.5
+
+- Added strongly-typed FirebaseFunctionsRegion enum (Cloud Functions v2 regions).
+- Replaced string callableRegion with typed region.
+- Introduced PasswordPolicy for configurable registration validation.
+- Added SignInModule and SignUpModule configuration.
+- Added requireEmailVerification (sign-in & sign-up).
+- Added autoSignInAfterSignUp option.
+- Removed list-based modules configuration.
+- Improved documentation with templates and macros.
+
 # 1.1.4
 
 - Updated and refined authentication documentation for `AuthGen`.
